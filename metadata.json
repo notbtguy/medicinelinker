@@ -1,0 +1,7 @@
+{
+  "name": "Medical Connection",
+  "description": "An AI-powered academic and clinical synthesis platform mapping interdisciplinary connections across all 19 medical subjects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

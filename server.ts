@@ -1,8 +1,7 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
-import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
-import { createServer as createViteServer } from "vite";
+import { GoogleGenAI, Type } from "@google/genai";
 import { findCuratedSynthesis } from "./src/data/curatedSyntheses";
 
 dotenv.config();
@@ -64,12 +63,12 @@ async function generateContentWithFallback(params: {
 }
 
 // Health check
-app.get("/api/health", (_req, res) => {
+app.get(["/api/health", "/health"], (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // Gemini connectivity diagnostic check
-app.get("/api/gemini-status", async (_req, res) => {
+app.get(["/api/gemini-status", "/gemini-status"], async (_req, res) => {
   const hasKey = !!process.env.GEMINI_API_KEY;
   if (!hasKey) {
     res.status(500).json({ status: "error", message: "GEMINI_API_KEY environment variable is not configured." });
@@ -97,7 +96,7 @@ app.get("/api/gemini-status", async (_req, res) => {
 });
 
 // Analyze connection between two medical terms across the 19 subjects
-app.post("/api/analyze-connection", async (req, res) => {
+app.post(["/api/analyze-connection", "/analyze-connection"], async (req, res) => {
   try {
     const { subject1, term1, subject2, term2, focusArea } = req.body;
 
@@ -320,7 +319,7 @@ Provide the output strictly in the requested JSON structure.`;
 });
 
 // Quick clinical challenge / quiz on the connection
-app.post("/api/generate-quiz", async (req, res) => {
+app.post(["/api/generate-quiz", "/generate-quiz"], async (req, res) => {
   try {
     const { term1, subject1, term2, subject2, coreThesis } = req.body;
 
@@ -364,7 +363,13 @@ app.post("/api/generate-quiz", async (req, res) => {
 
 // Setup Vite or static serving
 async function setupServer() {
+  if (process.env.VERCEL) {
+    // Vercel routes static files and functions automatically
+    return;
+  }
+
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -383,4 +388,8 @@ async function setupServer() {
   });
 }
 
-setupServer();
+if (!process.env.VERCEL) {
+  setupServer();
+}
+
+export default app;

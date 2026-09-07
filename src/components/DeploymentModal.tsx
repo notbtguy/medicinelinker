@@ -48,37 +48,35 @@ export const DeploymentModal: React.FC<DeploymentModalProps> = ({ isOpen, onClos
             </p>
           </div>
 
-          {/* Solution 1: Built-in Resilient Engine */}
+          {/* Solution 1: Vercel Serverless (Recommended) */}
           <div className="border border-slate-200 rounded-xl p-4 bg-white space-y-2">
             <div className="flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-teal-100 text-teal-800 text-xs font-bold flex items-center justify-center">1</span>
               <h4 className="font-bold text-slate-900 text-sm">
-                Built-in Resilient Engine (Active Now)
+                Deploy to Vercel (Configured & Ready)
               </h4>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed pl-8">
-              The application automatically provides seamless fallback on static hosts or during high-demand spikes:
+              The project is now fully configured for Vercel Serverless functions via <code className="bg-slate-100 px-1 py-0.5 rounded text-[11px] font-mono">vercel.json</code> and <code className="bg-slate-100 px-1 py-0.5 rounded text-[11px] font-mono">/api/index.ts</code>:
             </p>
-            <ul className="text-xs text-slate-600 space-y-1.5 pl-12 list-disc">
-              <li>
-                <strong>Curated Peer-Reviewed Library:</strong> High-yield connections (e.g. Malaria ↔ Erythema Nodosum, Mitral Stenosis ↔ Ortner's, Ankylosing Spondylitis ↔ Uveitis) load instantly with complete pathophysiology and case vignettes.
-              </li>
-              <li>
-                <strong>Structured Academic Synthesis:</strong> Any custom cross-disciplinary topic generates an interactive, multi-step biological pathway without ever breaking the interface.
-              </li>
-            </ul>
+            <div className="pl-8 text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono text-slate-700 space-y-1.5">
+              <p>1. Push your repository to GitHub.</p>
+              <p>2. Import repository on <strong>Vercel</strong> (Select <strong>Vite</strong> preset).</p>
+              <p>3. Add Environment Variable: <code className="text-teal-700 font-bold">GEMINI_API_KEY</code>.</p>
+              <p>4. Hit <strong>Deploy</strong> — live AI endpoints work seamlessly!</p>
+            </div>
           </div>
 
-          {/* Solution 2: Full-Stack Cloud Run, Render, or Railway */}
+          {/* Solution 2: Full-Stack Container (Cloud Run, Render, Railway) */}
           <div className="border border-slate-200 rounded-xl p-4 bg-white space-y-2">
             <div className="flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-purple-100 text-purple-800 text-xs font-bold flex items-center justify-center">2</span>
               <h4 className="font-bold text-slate-900 text-sm">
-                Deploy as a Full-Stack Node App (Cloud Run, Render, Railway)
+                Deploy as a Persistent Node App (Cloud Run, Render, Railway)
               </h4>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed pl-8">
-              For live AI synthesis powered by the Express backend with protected server-side API keys:
+              For dedicated container hosting running the persistent Express server:
             </p>
             <div className="pl-8 text-xs bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono text-slate-700 space-y-1">
               <p>• Build Command: <code className="text-teal-700 font-bold">npm run build</code></p>
